@@ -40,3 +40,5 @@ searchBtn.addEventListener("click", async () => {
 });
 
 loadMovies();
+
+container.classList.add("movie-grid");
