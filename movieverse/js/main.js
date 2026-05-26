@@ -16,16 +16,20 @@ function displayMovies(movies) {
         const card = document.createElement("div");
         card.classList.add("movie-card");
 
+        const poster = movie.poster_path
+            ? IMAGE_URL + movie.poster_path
+            : "https://via.placeholder.com/300x450";
+
         card.innerHTML = `
-      <img src="${IMAGE_URL + movie.poster_path}" />
-      <div class="movie-info">
-        <h3>${movie.title}</h3>
-        <p>⭐ ${movie.vote_average}</p>
-        <button onclick="location.href='details.html?id=${movie.id}'">
-          View
-        </button>
-      </div>
-    `;
+            <img src="${poster}" />
+            <div class="movie-info">
+                <h3>${movie.title}</h3>
+                <p>⭐ ${movie.vote_average}</p>
+                <button onclick="location.href='details.html?id=${movie.id}'">
+                    View
+                </button>
+            </div>
+        `;
 
         container.appendChild(card);
     });
@@ -40,5 +44,3 @@ searchBtn.addEventListener("click", async () => {
 });
 
 loadMovies();
-
-container.classList.add("movie-grid");
