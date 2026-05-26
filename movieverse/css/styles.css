@@ -1,7 +1,6 @@
-body {
-    background: red !important;
-}
-/* GLOBAL */
+/* =========================
+   GLOBAL RESET
+========================= */
 * {
     margin: 0;
     padding: 0;
@@ -12,9 +11,14 @@ body {
     font-family: Arial, sans-serif;
     background: #0d0d0d;
     color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
 .header {
     display: flex;
     justify-content: space-between;
@@ -22,11 +26,11 @@ body {
     padding: 15px 20px;
     background: #141414;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 15px;
 }
 
 .logo {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
     color: #e50914;
 }
@@ -39,9 +43,16 @@ body {
 .nav a {
     color: white;
     text-decoration: none;
+    font-size: 14px;
 }
 
-/* SEARCH */
+.nav a:hover {
+    color: #e50914;
+}
+
+/* =========================
+   SEARCH BAR
+========================= */
 .search {
     display: flex;
     gap: 10px;
@@ -49,9 +60,11 @@ body {
 }
 
 .search input {
-    padding: 8px;
+    padding: 8px 10px;
     border-radius: 5px;
     border: none;
+    outline: none;
+    width: 200px;
 }
 
 .search button {
@@ -61,26 +74,39 @@ body {
     padding: 8px 12px;
     border-radius: 5px;
     cursor: pointer;
+    transition: 0.3s;
 }
 
-/* MAIN */
+.search button:hover {
+    background: #ff1f2d;
+}
+
+/* =========================
+   MAIN CONTENT
+========================= */
 .main {
     padding: 20px;
+    flex: 1;
 }
 
-/* ⭐ FIXED GRID (THIS FIXES YOUR BIG LINE ISSUE) */
+/* =========================
+   MOVIE GRID (FIXED ISSUE)
+========================= */
 .movie-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 20px;
+    margin-top: 20px;
 }
 
-/* MOVIE CARD */
+/* =========================
+   MOVIE CARD
+========================= */
 .movie-card {
     background: #1f1f1f;
     border-radius: 10px;
     overflow: hidden;
-    transition: 0.3s;
+    transition: transform 0.3s ease;
 }
 
 .movie-card:hover {
@@ -91,26 +117,53 @@ body {
     width: 100%;
     height: 260px;
     object-fit: cover;
+    display: block;
+    background: #333;
 }
 
 .movie-info {
     padding: 10px;
 }
 
-/* FOOTER */
+.movie-info h3 {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.movie-info p {
+    font-size: 12px;
+    color: #aaa;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+button {
+    margin-top: 10px;
+}
+
+/* =========================
+   FOOTER
+========================= */
 .footer {
     text-align: center;
     padding: 20px;
     background: #141414;
-    margin-top: 40px;
     color: #aaa;
+    margin-top: auto;
 }
 
-/* MOBILE */
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
 @media (max-width: 768px) {
     .header {
         flex-direction: column;
         text-align: center;
+    }
+
+    .search input {
+        width: 100%;
     }
 
     .movie-grid {
@@ -121,5 +174,9 @@ body {
 @media (max-width: 480px) {
     .movie-grid {
         grid-template-columns: 1fr;
+    }
+
+    .movie-card img {
+        height: 300px;
     }
 }
