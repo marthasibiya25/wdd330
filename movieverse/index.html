@@ -10,27 +10,29 @@
 
 <body>
 
-    <header>
-        <h1>🎬 MovieVerse</h1>
+    <header class="header">
+        <div class="logo">🎬 MovieVerse</div>
 
-        <nav>
+        <nav class="nav">
             <a href="index.html">Home</a>
             <a href="favorites.html">Favorites</a>
         </nav>
 
-        <div class="search-container">
+        <div class="search">
             <input type="text" id="searchInput" placeholder="Search movies...">
             <button id="searchBtn">Search</button>
         </div>
     </header>
 
-    <main>
+    <main class="main">
         <h2>Trending Movies</h2>
+
+        <!-- THIS IS WHERE MOVIES GO -->
         <section id="moviesContainer" class="movie-grid"></section>
     </main>
 
-    <footer>
-        <p>MovieVerse © 2026</p>
+    <footer class="footer">
+        <p>© 2026 MovieVerse | Built by Martha Sibiya</p>
     </footer>
 
     <script type="module" src="js/main.js"></script>

@@ -1,3 +1,4 @@
+/* GLOBAL */
 * {
     margin: 0;
     padding: 0;
@@ -6,73 +7,117 @@
 
 body {
     font-family: Arial, sans-serif;
-    background: #111;
+    background: #0d0d0d;
     color: white;
 }
 
-header {
-    background: #1f1f1f;
-    padding: 20px;
+/* HEADER */
+.header {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    gap: 20px;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    margin-right: 15px;
-}
-
-.search-container {
-    display: flex;
+    padding: 15px 20px;
+    background: #141414;
+    flex-wrap: wrap;
     gap: 10px;
 }
 
-input {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: #e50914;
 }
 
-button {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    background: #e50914;
+.nav {
+    display: flex;
+    gap: 15px;
+}
+
+.nav a {
     color: white;
+    text-decoration: none;
+}
+
+/* SEARCH */
+.search {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.search input {
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+}
+
+.search button {
+    background: #e50914;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
     cursor: pointer;
 }
 
-main {
+/* MAIN */
+.main {
     padding: 20px;
 }
 
+/* ⭐ FIXED GRID (THIS FIXES YOUR BIG LINE ISSUE) */
 .movie-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 20px;
     margin-top: 20px;
 }
 
+/* MOVIE CARD */
 .movie-card {
     background: #1f1f1f;
     border-radius: 10px;
     overflow: hidden;
+    transition: 0.3s;
+}
+
+.movie-card:hover {
+    transform: scale(1.05);
 }
 
 .movie-card img {
     width: 100%;
-    height: 330px;
+    height: 260px;
     object-fit: cover;
 }
 
 .movie-info {
-    padding: 15px;
+    padding: 10px;
 }
 
-.movie-info h3 {
-    margin-bottom: 10px;
+/* FOOTER */
+.footer {
+    text-align: center;
+    padding: 20px;
+    background: #141414;
+    margin-top: 40px;
+    color: #aaa;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .movie-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .movie-grid {
+        grid-template-columns: 1fr;
+    }
 }
