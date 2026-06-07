@@ -1,40 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trusted Contacts</title>
+    <title>Contacts</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
 
-    <header>
-        <h1>Trusted Contacts</h1>
-    </header>
+    <h1>Trusted Contacts</h1>
 
-    <main>
+    <form id="form">
+        <input id="name" placeholder="Name" required>
+        <input id="phone" placeholder="Phone" required>
+        <button>Add</button>
+    </form>
 
-        <h2>Add Emergency Contact</h2>
+    <ul id="list"></ul>
 
-        <form id="contactForm">
-            <input type="text" id="contactName" placeholder="Contact Name" required>
+    <script type="module">
+        import { addContact, getContacts } from "./js/contacts.js";
 
-            <input type="tel" id="contactPhone" placeholder="Phone Number" required>
+        const form = document.getElementById("form");
+        const list = document.getElementById("list");
 
-            <button type="submit">
-                Add Contact
-            </button>
-        </form>
+        function render() {
+            list.innerHTML = "";
+            getContacts().forEach(c => {
+                const li = document.createElement("li");
+                li.textContent = `${c.name} - ${c.phone}`;
+                list.appendChild(li);
+            });
+        }
 
-        <h2>Saved Contacts</h2>
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
 
-        <ul id="contactList"></ul>
+            addContact({
+                name: document.getElementById("name").value,
+                phone: document.getElementById("phone").value
+            });
 
-    </main>
+            render();
+        });
 
-    <script src="js/contacts.js"></script>
+        render();
+    </script>
 
 </body>
 
