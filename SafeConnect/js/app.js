@@ -1,3 +1,12 @@
+if (!localStorage.getItem("user")) {
+    window.location.href = "login.html";
+}
+
+function logout() {
+    localStorage.removeItem("user");
+    window.location.href = "login.html";
+}
+
 const alertBtn = document.getElementById("alertBtn");
 const locationInfo = document.getElementById("locationInfo");
 
