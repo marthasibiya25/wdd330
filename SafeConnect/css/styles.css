@@ -34,3 +34,28 @@ header {
     margin-top: 20px;
     font-size: 18px;
 }
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 300px;
+    margin: auto;
+}
+
+input {
+    padding: 10px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: white;
+    margin: 10px auto;
+    width: 300px;
+    padding: 10px;
+    border-radius: 5px;
+}
