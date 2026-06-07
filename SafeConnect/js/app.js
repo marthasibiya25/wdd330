@@ -25,4 +25,18 @@ function showPosition(position) {
         `Latitude: ${latitude}, Longitude: ${longitude}`;
 
     alert("Emergency Alert Activated!");
+
+    // SAVE ALERT TO HISTORY
+    let alerts = JSON.parse(localStorage.getItem("alerts")) || [];
+
+    const newAlert = {
+        id: Date.now(),
+        latitude,
+        longitude,
+        time: new Date().toLocaleString()
+    };
+
+    alerts.push(newAlert);
+
+    localStorage.setItem("alerts", JSON.stringify(alerts));
 }
