@@ -1,35 +1,72 @@
-import { saveAlert } from "./alerts.js";
+// Load contacts from localStorage
+let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
 
-const btn = document.getElementById("alertBtn");
-const locationBox = document.getElementById("locationBox");
+// Display contacts on page load
+window.onload = function () {
+    displayContacts();
+};
 
-let currentLat = null;
-let currentLon = null;
+// Add contact
+function addContact() {
+    let name = document.getElementById("contactName").value;
+    let phone = document.getElementById("contactPhone").value;
 
-// GET LOCATION
-navigator.geolocation.getCurrentPosition(
-    (position) => {
-
-        currentLat = position.coords.latitude;
-        currentLon = position.coords.longitude;
-
-        locationBox.textContent =
-            `📍 ${currentLat}, ${currentLon}`;
-    },
-    () => {
-        locationBox.textContent = "Location blocked ❌";
-    }
-);
-
-// SEND ALERT
-btn.addEventListener("click", () => {
-
-    if (currentLat === null || currentLon === null) {
-        alert("Wait for location to load");
+    if (!name || !phone) {
+        alert("Please enter both name and phone");
         return;
     }
 
-    saveAlert(currentLat, currentLon);
+    contacts.push({ name, phone });
+    localStorage.setItem("contacts", JSON.stringify(contacts));
 
-    alert("🚨 Emergency Alert Sent!");
+    document.getElementById("contactName").value = "";
+    document.getElementById("contactPhone").value = "";
+
+    displayContacts();
+}
+
+// Display contacts (FIX for "not appearing")
+function displayContacts() {
+    let list = document.getElementById("contactList");
+    list.innerHTML = "";
+
+    if (contacts.length === 0) {
+        list.innerHTML = "<li>No contacts added yet</li>";
+        return;
+    }
+
+    contacts.forEach((c, index) => {
+        let li = document.createElement("li");
+        li.innerHTML = `
+            ${c.name} - ${c.phone}
+            <button onclick="deleteContact(${index})">Delete</button>
+        `;
+        list.appendChild(li);
+    });
+}
+
+// Delete contact
+function deleteContact(index) {
+    contacts.splice(index, 1);
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+    displayContacts();
+}
+
+// FIXED Send Alert Button
+document.getElementById("sendAlertBtn").addEventListener("click", function () {
+    let status = document.getElementById("alertStatus");
+
+    if (contacts.length === 0) {
+        status.innerText = "No contacts to send alert to!";
+        status.style.color = "red";
+        return;
+    }
+
+    // Simulated alert sending
+    contacts.forEach(c => {
+        console.log(`ALERT SENT TO: ${c.name} (${c.phone})`);
+    });
+
+    status.innerText = "🚨 Alert sent to all trusted contacts!";
+    status.style.color = "green";
 });
