@@ -1,30 +1,34 @@
-import { getLocation } from "./location.js";
 import { saveAlert } from "./alerts.js";
-import { isLoggedIn } from "./auth.js";
-
-if (!isLoggedIn()) {
-    window.location.href = "login.html";
-}
 
 const btn = document.getElementById("alertBtn");
 const locationBox = document.getElementById("locationBox");
 
-let latestLat = 0;
-let latestLon = 0;
+let currentLat = null;
+let currentLon = null;
 
-getLocation((lat, lon) => {
-    latestLat = lat;
-    latestLon = lon;
+// GET LOCATION ON LOAD
+navigator.geolocation.getCurrentPosition(
+    (position) => {
+        currentLat = position.coords.latitude;
+        currentLon = position.coords.longitude;
 
-    locationBox.textContent = `Lat: ${lat}, Lon: ${lon}`;
-});
+        locationBox.textContent =
+            `📍 Lat: ${currentLat}, Lon: ${currentLon}`;
+    },
+    (error) => {
+        locationBox.textContent = "❌ Location permission denied";
+    }
+);
 
+// ALERT BUTTON
 btn.addEventListener("click", () => {
-    saveAlert(latestLat, latestLon);
-    alert("Emergency Alert Sent!");
-});
 
-window.logout = function () {
-    localStorage.removeItem("user");
-    window.location.href = "login.html";
-};
+    if (!currentLat || !currentLon) {
+        alert("Location not ready yet!");
+        return;
+    }
+
+    saveAlert(currentLat, currentLon);
+
+    alert("🚨 Emergency Alert Sent!");
+});

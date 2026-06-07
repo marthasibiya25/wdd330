@@ -13,16 +13,20 @@
     <ul id="list"></ul>
 
     <script>
-        let alerts = JSON.parse(localStorage.getItem("alerts")) || [];
-
         const list = document.getElementById("list");
+        const alerts = JSON.parse(localStorage.getItem("alerts")) || [];
+
+        if (alerts.length === 0) {
+            list.innerHTML = "<p>No alerts yet</p>";
+        }
 
         alerts.forEach(a => {
             const li = document.createElement("li");
             li.innerHTML = `
-        🚨 ${a.time}<br>
-        📍 ${a.latitude}, ${a.longitude}
-    `;
+            🚨 Emergency Alert<br>
+            📍 ${a.latitude}, ${a.longitude}<br>
+            ⏰ ${a.time}
+        `;
             list.appendChild(li);
         });
     </script>
