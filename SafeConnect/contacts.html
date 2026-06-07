@@ -25,27 +25,42 @@
         const list = document.getElementById("list");
 
         function render() {
-            list.innerHTML = "";
-            getContacts().forEach(c => {
-                const li = document.createElement("li");
-                li.textContent = `${c.name} - ${c.phone}`;
-                list.appendChild(li);
-            });
+
+        list.innerHTML = "";
+
+        const contacts = getContacts();
+
+        if (contacts.length === 0) {
+            list.innerHTML = "<p>No contacts added yet</p>";
+            return;
         }
 
-        form.addEventListener("submit", (e) => {
-            e.preventDefault();
+        contacts.forEach(c => {
 
-            addContact({
-                name: document.getElementById("name").value,
-                phone: document.getElementById("phone").value
-            });
+            const li = document.createElement("li");
 
-            render();
+            li.textContent = `${c.name} - ${c.phone}`;
+
+            list.appendChild(li);
         });
+    }
+
+    form.addEventListener("submit", (e) => {
+
+        e.preventDefault();
+
+        const name = document.getElementById("name").value;
+        const phone = document.getElementById("phone").value;
+
+        addContact({ name, phone });
+
+        form.reset();
 
         render();
-    </script>
+    });
+
+    render();
+</script>
 
 </body>
 

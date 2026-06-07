@@ -3,7 +3,10 @@ export function getContacts() {
 }
 
 export function addContact(contact) {
+
     let contacts = getContacts();
+
     contacts.push(contact);
+
     localStorage.setItem("contacts", JSON.stringify(contacts));
 }

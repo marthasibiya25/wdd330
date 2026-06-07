@@ -6,25 +6,26 @@ const locationBox = document.getElementById("locationBox");
 let currentLat = null;
 let currentLon = null;
 
-// GET LOCATION ON LOAD
+// GET LOCATION
 navigator.geolocation.getCurrentPosition(
     (position) => {
+
         currentLat = position.coords.latitude;
         currentLon = position.coords.longitude;
 
         locationBox.textContent =
-            `📍 Lat: ${currentLat}, Lon: ${currentLon}`;
+            `📍 ${currentLat}, ${currentLon}`;
     },
-    (error) => {
-        locationBox.textContent = "❌ Location permission denied";
+    () => {
+        locationBox.textContent = "Location blocked ❌";
     }
 );
 
-// ALERT BUTTON
+// SEND ALERT
 btn.addEventListener("click", () => {
 
-    if (!currentLat || !currentLon) {
-        alert("Location not ready yet!");
+    if (currentLat === null || currentLon === null) {
+        alert("Wait for location to load");
         return;
     }
 
