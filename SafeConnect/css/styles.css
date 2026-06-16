@@ -1,82 +1,36 @@
 body {
-    font-family: Arial;
+    font-family: Arial, sans-serif;
     margin: 0;
-    text-align: center;
-    background: #f4f4f4;
+    background-color: #f4f4f4;
 }
 
 header {
-    background: #1E2A38;
+    background-color: #1E2A38;
     color: white;
+    text-align: center;
     padding: 20px;
 }
 
-#alertBtn {
-    background: red;
-    color: white;
-    padding: 15px;
-    border: none;
-    cursor: pointer;
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.05);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-ul {
-    list-style: none;
-    padding: 0;
-}
-
-li {
-    background: white;
-    margin: 10px;
-    padding: 10px;
-}
-
-.map-container {
-    margin-top: 20px;
-    border-radius: 10px;
-    overflow: hidden;
+.hero {
+    text-align: center;
+    padding: 40px;
 }
 
 #alertBtn {
-    background: #D32F2F;
+    background-color: #D32F2F;
     color: white;
-    padding: 18px 30px;
     border: none;
+    padding: 15px 25px;
     font-size: 18px;
-    border-radius: 8px;
-    animation: pulse 2s infinite;
+    cursor: pointer;
+    border-radius: 5px;
 }
 
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.08);
-    }
-
-    100% {
-        transform: scale(1);
-    }
+#alertBtn:hover {
+    opacity: 0.9;
 }
 
-nav a {
-    margin: 10px;
-    text-decoration: none;
-    font-weight: bold;
+#locationInfo {
+    margin-top: 20px;
+    font-size: 18px;
 }

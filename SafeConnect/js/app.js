@@ -1,72 +1,28 @@
-// Load contacts from localStorage
-let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
+const alertBtn = document.getElementById("alertBtn");
+const locationInfo = document.getElementById("locationInfo");
 
-// Display contacts on page load
-window.onload = function () {
-    displayContacts();
-};
+alertBtn.addEventListener("click", getLocation);
 
-// Add contact
-function addContact() {
-    let name = document.getElementById("contactName").value;
-    let phone = document.getElementById("contactPhone").value;
+function getLocation() {
 
-    if (!name || !phone) {
-        alert("Please enter both name and phone");
-        return;
+    if (navigator.geolocation) {
+
+        navigator.geolocation.getCurrentPosition(showPosition);
+
+    } else {
+
+        locationInfo.textContent =
+            "Geolocation is not supported by this browser.";
     }
-
-    contacts.push({ name, phone });
-    localStorage.setItem("contacts", JSON.stringify(contacts));
-
-    document.getElementById("contactName").value = "";
-    document.getElementById("contactPhone").value = "";
-
-    displayContacts();
 }
 
-// Display contacts (FIX for "not appearing")
-function displayContacts() {
-    let list = document.getElementById("contactList");
-    list.innerHTML = "";
+function showPosition(position) {
 
-    if (contacts.length === 0) {
-        list.innerHTML = "<li>No contacts added yet</li>";
-        return;
-    }
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
 
-    contacts.forEach((c, index) => {
-        let li = document.createElement("li");
-        li.innerHTML = `
-            ${c.name} - ${c.phone}
-            <button onclick="deleteContact(${index})">Delete</button>
-        `;
-        list.appendChild(li);
-    });
+    locationInfo.textContent =
+        `Latitude: ${latitude}, Longitude: ${longitude}`;
+
+    alert("Emergency Alert Activated!");
 }
-
-// Delete contact
-function deleteContact(index) {
-    contacts.splice(index, 1);
-    localStorage.setItem("contacts", JSON.stringify(contacts));
-    displayContacts();
-}
-
-// FIXED Send Alert Button
-document.getElementById("sendAlertBtn").addEventListener("click", function () {
-    let status = document.getElementById("alertStatus");
-
-    if (contacts.length === 0) {
-        status.innerText = "No contacts to send alert to!";
-        status.style.color = "red";
-        return;
-    }
-
-    // Simulated alert sending
-    contacts.forEach(c => {
-        console.log(`ALERT SENT TO: ${c.name} (${c.phone})`);
-    });
-
-    status.innerText = "🚨 Alert sent to all trusted contacts!";
-    status.style.color = "green";
-});
