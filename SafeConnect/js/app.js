@@ -50,5 +50,3 @@ function logout() {
     window.location.href = "login.html";
 }
 
-import { getLocation } from "./location.js";
-import { saveAlert } from "./alerts.js";
