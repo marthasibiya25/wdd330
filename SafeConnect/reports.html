@@ -1,35 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Reports</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alert History</title>
+
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
 
-    <h1>Alert History</h1>
+    <header>
+        <h1>Alert History</h1>
+    </header>
 
-    <ul id="list"></ul>
+    <main>
 
-    <script>
-        const list = document.getElementById("list");
-        const alerts = JSON.parse(localStorage.getItem("alerts")) || [];
+        <h2>Past Emergency Alerts</h2>
 
-        if (alerts.length === 0) {
-            list.innerHTML = "<p>No alerts yet</p>";
-        }
+        <ul id="alertList"></ul>
 
-        alerts.forEach(a => {
-            const li = document.createElement("li");
-            li.innerHTML = `
-            🚨 Emergency Alert<br>
-            📍 ${a.latitude}, ${a.longitude}<br>
-            ⏰ ${a.time}
-        `;
-            list.appendChild(li);
-        });
-    </script>
+        <button id="clearAlertsBtn">
+            Clear History
+        </button>
+
+    </main>
+
+    <script src="js/alerts.js"></script>
 
 </body>
 
