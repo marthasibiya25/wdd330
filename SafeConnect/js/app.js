@@ -1,3 +1,6 @@
+if (!localStorage.getItem("user")) {
+    window.location.href = "login.html";
+}
 const alertBtn = document.getElementById("alertBtn");
 const locationInfo = document.getElementById("locationInfo");
 
@@ -40,4 +43,9 @@ const newAlert = {
 alerts.push(newAlert);
 
 localStorage.setItem("alerts", JSON.stringify(alerts));
+}
+
+function logout() {
+    localStorage.removeItem("user");
+    window.location.href = "login.html";
 }

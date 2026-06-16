@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>Login - SafeConnect</title>
+    <title>Login</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
@@ -12,29 +11,18 @@
     <h1>SafeConnect Login</h1>
 
     <form id="loginForm">
-        <input id="username" placeholder="Username" required>
-        <input id="password" type="password" placeholder="Password" required>
+
+        <input type="text" id="username" placeholder="Username" required>
+
+        <input type="password" id="password" placeholder="Password" required>
+
         <button type="submit">Login</button>
+
     </form>
 
-    <p id="msg"></p>
+    <p id="loginMsg"></p>
 
-    <script type="module">
-        import { login } from "./js/auth.js";
-
-        document.getElementById("loginForm").addEventListener("submit", (e) => {
-            e.preventDefault();
-
-            const username = document.getElementById("username").value;
-            login(username);
-
-            document.getElementById("msg").textContent = "Login successful...";
-
-            setTimeout(() => {
-                window.location.href = "dashboard.html";
-            }, 1000);
-        });
-    </script>
+    <script src="js/auth.js"></script>
 
 </body>
 
